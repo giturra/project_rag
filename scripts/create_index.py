@@ -4,7 +4,7 @@ from typing import Iterable, Iterator, TypeVar
 from elasticsearch import Elasticsearch
 
 from src.core.mappings import DOCUMENT_MAPPING
-from src.search.elastic_index import ElasticIndex
+from src.search.index import ElasticIndex
 from src.utils.json_io import iter_jsonl
 
 

@@ -219,5 +219,8 @@ __marimo__/
 # Streamlit
 .streamlit/secrets.toml
 
+.vscode/
+
 data/**/*.json
 data/**/*.jsonl
+
