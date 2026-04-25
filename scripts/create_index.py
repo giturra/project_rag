@@ -93,3 +93,6 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+
+# Example usage:
+# python -m scripts.create_index   --host http://localhost:9200   --index test_documents   --input data/index/full.jsonl   --id-field id   --chunk-size 500   --limit 100
