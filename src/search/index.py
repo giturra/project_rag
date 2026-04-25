@@ -49,18 +49,23 @@ class ElasticIndex:
         self,
         documents: Iterable[dict[str, Any]],
         id_field: str | None = None,
+        chunk_size: int = 500,
     ) -> tuple[int, list[Any]]:
-        actions = []
-        for doc in documents:
-            action = {
-                "_index": self.index_name,
-                "_source": doc,
-            }
-            if id_field and id_field in doc:
-                action["_id"] = str(doc[id_field])
-            actions.append(action)
+        def actions():
+            for doc in documents:
+                action = {
+                    "_index": self.index_name,
+                    "_source": doc,
+                }
+                if id_field and id_field in doc:
+                    action["_id"] = str(doc[id_field])
+                yield action
 
-        return helpers.bulk(self.client, actions)
+        return helpers.bulk(
+            self.client,
+            actions(),
+            chunk_size=chunk_size,
+        )
 
     def search(self, query: dict[str, Any], size: int = 10) -> dict[str, Any]:
         return self.client.search(
