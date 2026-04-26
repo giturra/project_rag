@@ -34,13 +34,14 @@ def main() -> None:
     print(f"\nQuery: {query.question}")
     print(f"Top {top_k} results:\n")
 
-    for i, doc in enumerate(ranking.documents(), start=1):
-        print(doc)
-        # preview = (doc.content or "")[:300].replace("\n", " ")
+    idxs, docs = ranking.documents()
 
-        # print(f"{i}. doc_id={doc.doc_id} score={doc.score}")
-        # print(f"   {preview}")
-        # print()
+    for i, doc in zip(idxs, docs):
+
+
+        print(f"doc_id={i} score={doc}")
+    
+        break
 
 
 if __name__ == "__main__":
